@@ -1,0 +1,68 @@
+// Place all the styles related to the negotiations controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#conversation {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    
+    a.powered-by-image {
+        display: inline-block;
+        height: 2.1em;
+        width: 5em;
+        //background-image: image-url('images/InKomerce-logo-small.png');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+        background-color: transparent;
+        vertical-align: middle;
+        border: none;
+    }
+    
+    div.powered-by {
+        float: right;
+        top: -22px;
+        position: relative;
+    }
+    
+    #negotiation_offer {
+        width: 10em;
+    }
+    
+    .alert {
+        margin-right: 5px;
+    }
+}
+
+#product-panel {
+    div.carousel {
+        .carousel-inner > .item > img, .carousel-inner > .item > a > img {
+            width: 100%;
+        }
+    }
+}
+
+#negotiation-panel {
+    div.panel-body {
+        background-color: #f4faf0;
+    }
+    div.negotiation-history.list-group {
+        max-height: 300px;
+        overflow-x: hidden;
+        overflow-y: scroll;
+    }
+}
+
+#negotiationForm {
+  span.currnecy-symbol {
+    width: 1em;
+    display: inline-block;
+    text-align: right;
+  }
+  input[name="bid"] {
+    width: 10em;
+  }
+  button[type="submit"] {
+    vertical-align: top;
+  }
+}

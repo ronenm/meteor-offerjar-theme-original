@@ -1,0 +1,15 @@
+<template name="NegotiationForm">
+    {{#autoForm id="negotiationForm" doc=doc schema=schema type=formType resetOnSuccess=false class='nego-form form-inline'}}
+        <fieldset>
+            <div class="form-group{{#if afFieldIsInvalid name='bid'}} has-error{{/if}}">
+                <label class="control-label">{{ojt 'offer'}}</label>
+                <span class="currnecy-symbol">{{ negotiationCurrency.symbol }}</span>
+                <div class="input-group">               
+                    {{> afFieldInput name='bid' placeholder=inputPlaceHolder}}
+                </div>
+                <span class="help-block">{{{afFieldMessage name='bid'}}}</span>
+            </div>
+            {{>NegotiationSubmitOfferButton}}
+        </fieldset>
+    {{/autoForm}}
+</template>

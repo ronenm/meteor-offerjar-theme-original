@@ -1,0 +1,44 @@
+<template name="Negotiation">
+  <div class='container' id="conversation">
+    <div class="row">
+      <h2 class="product-title" id="product-title">
+        {{#withLoading productTitle }}
+          {{ productTitle }}
+        {{/withLoading}}
+      </h2>
+    </div>
+    <div class="row">
+      <div class="product col-md-5 col-sm-5 col-xs-12">
+        <div class="product-panel panel panel-default" id="product-panel">
+          {{#withLoading currentButton}}
+            <div class="main-image" id="product-gallery">
+               {{> ProductGallery }}
+            </div>
+            <div class="product-description">
+              {{ description }}
+            </div>
+          {{/withLoading}}
+        </div>
+      </div>
+      <div class="col-md-7 col-sm-7 col-xs-12">
+        <div class="negotiation-panel panel panel-success" id="negotiation-panel">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <strong>{{ ojt "online_negotiation_title" }}</strong>
+            </h4>
+          </div>
+          <div class="panel-body">
+            {{#withLoading currentNegotiation}}
+              {{> NegotiationDialog }}
+            {{/withLoading}}
+            <br/><br/>
+            <h4>{{ ojt "negotiation_history_title" }}</h4>
+            {{#loadingUntil negotiationInfoReady }}
+              {{> NegotiationHistory negotiationHistory }}
+            {{/loadingUntil}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

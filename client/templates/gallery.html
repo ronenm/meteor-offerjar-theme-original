@@ -1,0 +1,59 @@
+
+<template name="ProductGallery">
+    <div id="product-gallery">
+        {{#if images}}
+            {{#if singleImage}}
+                {{>OfferJarImage image=singleImage.image captionClass="caption"}}
+            {{else}}
+                <div class="slider">
+                    {{#each images}}
+                        <div>
+                            {{>OfferJarImage image=image captionClass="caption"}}
+                        </div>
+                    {{/each}}
+                </div>
+            {{/if}}
+        {{else}}
+            <img src="/nophoto/limit_width.png" alt="nophoto"/>
+        {{/if}}
+    </div>
+</template>
+
+
+<template name="OfferJarImage">
+    <img src="{{url}}" data-src={{url}}/>
+    {{#if title}}
+        <div class="{{captionClass}}">
+            {{title}}
+        </div>
+    {{/if}}
+</template>
+
+<!--
+<template name="ProductGallery">
+    {{#if images}}
+        {{#if singleImage}}
+            {{>OfferJarImage image=singleImage.image captionClass="carousel-caption"}}
+        {{else}}
+            <div class="carousel slide" data-interval="false" id="gallery">
+                <ol class="carousel-indicators">
+                    {{#each imageIndices}}
+                        <li data-target="#gallery" data-slide-to="{{index}}"></li>
+                    {{/each}}
+                </ol>
+                <div class="carousel-inner">
+                    {{#each images}}
+                        <div class="item">    
+                            {{>OfferJarImage image=image captionClass="carousel-captionClass"}}
+                        </div>
+                    {{/each}}
+                </div>
+                <a class="carousel-control left" href="#gallery" data-slide="prev">&lsaquo;</a>
+                <a class="carousel-control right" href="#gallery" data-slide="next">&rsaquo;</a>
+            </div>
+        {{/if}}
+    {{else}}
+        <img src="nophoto/limit_width.png" alt="nophoto"/>
+    {{/if}}
+</template>
+-->

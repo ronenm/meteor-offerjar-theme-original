@@ -1,9 +1,9 @@
 <template name="PriceLine">
     <div class="{{webClass}}" id="{{lineId}}">
-        <div class="col-lg-3 col-md-4 col-sm-5 col-xs-3 legend-col">
+        <div class="col-lg-3 col-md-3 col-sm-4 col-xs-3 legend-col">
             <h4 class="legend">{{{lineLegend}}}</h4>
         </div>
-        <div class="col-lg-3 col-md-3 col-sm-4 col-xs-3 text-right price-col">
+        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-3 text-right price-col">
             <h4 class="price {{linePriceClass}}">
                 {{#withLoading price}}
                     {{> showMoney}}
@@ -11,7 +11,7 @@
             </h4>
         </div>
         {{#if extraTemplate}}
-            <div class="extra-col col-lg-6 col-md-5 col-sm-3 col-xs-6">
+            <div class="extra-col col-lg-6 col-md-5 col-sm-4 col-xs-6">
                 {{> Template.dynamic template=extraTemplate }}
             </div>
         {{/if}}
@@ -39,27 +39,28 @@
     </div>
 </template>
 
-<template name="NegotiationAcceptOffer">
+<template name="NegotiationAcceptOfferExtra">
     {{> NegotiationAcceptOfferButton legendKey="accept_other_bid" }}
+    {{#if canAcceptOffer }}
+        <span id="direct-to-offer"> {{ojt 'or'}} <a href="#negotiationForm">{{ojt 'offer'}} <span class="animate glyphicon glyphicon-arrow-down"></span></a></span>
+    {{/if}}
 </template>
 
 <template name="NegotiationDialog">
     <div class="negotiation-details col-md-12">
         {{>RetailPriceLine extraTemplate="PriceCurrencyInfo"}}
-        {{>PriceLine field="saving" legendKey="saving_legend" priceClass="price-saving"}}
+        {{>PriceLineCallOut field="saving" legendKey="saving_legend" priceClass="price-saving"}}
         {{#if isOpenForNegotiation}}
-        {{>PriceLine field="otherBid" legendKey="saving_offer" priceClass="price-important" extraTemplate="NegotiationAcceptOffer" }}
+        {{>PriceLineCallOut field="otherBid" legendKey="saving_offer" priceClass="price-important" extraTemplate="NegotiationAcceptOfferExtra" }}
         {{else}}
-        {{>PriceLine field="otherBid" legendKey="last_offer" priceClass="price-important" }}
+        {{>PriceLineCallOut field="otherBid" legendKey="last_offer" priceClass="price-important" extraTemplate="NegotiationCheckoutButton" }}
         {{/if}}
         {{>PriceLine field="bid" legendKey="your_bid_legend" priceClass="price-important" }}
         {{>NegotiationLatestMessage}}
         
-        <div class="row conversation-reply">
+        <div class="conversation-reply">
             {{#if isOpenForNegotiation  }}
                 {{> NegotiationForm currentNegotiation }}
-            {{else}}
-                {{> NegotiationCheckoutButton }}
             {{/if}}
         </div>
     </div>

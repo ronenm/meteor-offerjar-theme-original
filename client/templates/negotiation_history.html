@@ -1,26 +1,23 @@
 <template name="NegotiationHistory">
     <div class="negotiation-history-wrapper">
         <small>
-            <table class="negotiation-history panel panel-default list-group table table-condensed table-hover">
+            <div id="negotiation-history">
                 {{#each this}}
                     {{> NegotiationHistoryRow }}
                 {{/each}}
-            </table>
+            </div>
         </small>
     </div>
 </template>
 
 <template name="NegotiationHistoryRow">
-    <tr id="history-{{id}}" class="list-group-item row">
-        <td class="bidder">
-          {{legend}}
-        </td>
-        <td class="text-right offer">
-          {{> showMoney offer }}
-        </td>
-        <td class="time-col">
+    <div class="history-item" id="history-{{id}}">
+        {{index}}:
+        <span class="bidder">{{legend}}</span>
+        <span class="offer">{{> showMoney offer }}</span>
+        <!--<span class="time-col">
           {{ moFrom time moNow }}
-        </td>
-      </tr>
+        </span>-->
+    </div>
 </template>
 

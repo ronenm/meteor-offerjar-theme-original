@@ -31,11 +31,16 @@
             {{#withLoading currentNegotiation}}
               {{> NegotiationDialog }}
             {{/withLoading}}
-            <br/><br/>
-            <h4>{{ ojt "negotiation_history_title" }}</h4>
-            {{#loadingUntil negotiationInfoReady }}
-              {{> NegotiationHistory negotiationHistory }}
-            {{/loadingUntil}}
+            <div class="row">
+              <div class="col-md-6 col-sm-5 col-xs-1">
+              </div>
+              <div class="col-md-6 col-sm-7 col-xs-11">
+                <h4>{{ ojt "negotiation_history_title" }}</h4>
+                {{#loadingUntil negotiationInfoReady }}
+                  {{> NegotiationHistory negotiationHistory }}
+                {{/loadingUntil}}
+              </div>
+            </div>
           </div>
         </div>
       </div>

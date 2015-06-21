@@ -1,15 +1,25 @@
 <template name="NegotiationForm">
-    {{#autoForm id="negotiationForm" doc=doc schema=schema type=formType resetOnSuccess=false class='nego-form form-inline'}}
+    {{#autoForm id="negotiationForm" doc=doc schema=schema type=formType resetOnSuccess=false class='nego-form'}}
         <fieldset>
-            <div class="form-group{{#if afFieldIsInvalid name='bid'}} has-error{{/if}}">
-                <label class="control-label">{{ojt 'offer'}}</label>
-                <span class="currnecy-symbol">{{ negotiationCurrency.symbol }}</span>
-                <div class="input-group">               
-                    {{> afFieldInput name='bid' placeholder=inputPlaceHolder}}
+            <div class="form-group{{#if afFieldIsInvalid name='bid'}} has-error{{/if}} row">
+                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-3 legend-col">
+                    <h4 class="legend"><label class="control-label">{{ojt 'offer'}}</label></h4>
                 </div>
-                <span class="help-block">{{{afFieldMessage name='bid'}}}</span>
+                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-3 price-col">
+                    <h4 class="price price-important">
+                        <span class="currnecy-symbol">{{ negotiationCurrency.symbol }}</span>
+                        <!--<div class="input-group">       -->        
+                            {{> afFieldInput name='bid' placeholder=inputPlaceHolder}}
+                        <!--</div>-->
+                    </h4>
+                    <span class="help-block">{{{afFieldMessage name='bid'}}}</span>
+                </div>
+                <div class="extra-col col-lg-6 col-md-5 col-sm-4 col-xs-6">
+                    {{>NegotiationSubmitOfferButton}}
+                </div>
             </div>
-            {{>NegotiationSubmitOfferButton}}
+
         </fieldset>
     {{/autoForm}}
 </template>
+

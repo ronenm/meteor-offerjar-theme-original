@@ -1,6 +1,6 @@
 Package.describe({
   name: 'ronenm:offerjar-theme-original',
-  version: '0.0.1',
+  version: '0.0.2',
   // Brief, one-line summary of the package.
   summary: 'Official templates for the OfferJar UI',
   // URL to the Git repository containing the source code for this package.
@@ -29,6 +29,7 @@ Package.onUse(function(api) {
   api.use('underscore');
   api.use('underscorestring:underscore.string@3.0.3');
   
+  api.addFiles("client/startup.js",'client');
   var templates_files = ['gallery','negotiation_dialog','negotiation_form', 'negotiation_history', 'negotiation'];
   for(var i = templates_files.length-1; i>=0; i--) {
     api.addFiles("client/templates/" + templates_files[i] + ".html",'client');

@@ -61,7 +61,7 @@ Template.NegotiationDialog.hooks({
   }
 });
 
-Template.PriceLine.copyAs("RetailPriceLine");
+Template.PriceLine.copyAs(["RetailPriceLine", "PriceLineCallOut"]);
 
 Template.RetailPriceLine.helpers({
   lineLegend: function() {
@@ -76,6 +76,26 @@ Template.RetailPriceLine.helpers({
     } else {
       return null;
     }
+  }
+});
+
+Template.PriceLineCallOut.hooks({
+  rendered: function() {
+    var tempInst = this;
+    var field = this.data.field;
+    this.autorun(function() {
+      var nego = OfferJar.UI.currentNegotiation.get();
+      if (nego[field] !== tempInst.oldPrice) {
+        tempInst.$('.price').velocity('callout.oj_flash',{
+          duration: 3000,                                                      
+          delay: 500,
+          drag: true,
+          stagger: 1600,
+          backwards: true
+        });
+        tempInst.oldPrice = nego[field];
+      }
+    });
   }
 });
 
@@ -151,16 +171,24 @@ Template.NegotiationCheckoutButton.hooks({
   }
 });
 
+Template.NegotiationSubmitOfferButton.helpers({
+  attrs: function() {
+    attr = {
+      class: "btn btn-success",
+      type: 'submit',
+      id: 'submit-bid'
+    };
+    return attr;
+  }
+});
+
+
 Template.NegotiationSubmitOfferButton.hooks({
   created: function() {
-    var negotiation = OfferJar.UI.currentNegotiation.get();
-    this.transition = negotiation && negotiation.currentState()==="initial_bid" ? 'set_initial_bid' : 'go_bid';
-    this.buttonStyle = 'success';
-    this.buttonType = "submit";
     this.defaultKey = 'submit';
     this.data.legendKey = 'submit';
     this.defaultLegend = 'Submit';
-    this.alternativeHandler = true
+    this.alternativeHandler = true;
   }
 });
 
@@ -170,8 +198,11 @@ Template.NegotiationLatestMessage.helpers({
     var waiting = !negotiation || negotiation.isWaiting;
     var att = {
       id: waiting ? "waiting-for-response" : "latest-message",
-      "class": "row alert alert-" + (waiting ? "info loading" : "success"),
-      role: "alert"
+      class: waiting ? "row alert alert-info loading" : "well well-sm"
+    }
+    
+    if (waiting) {
+      att.role = "alert";
     }
     return att;
   },
@@ -203,5 +234,32 @@ Template.NegotiationLatestMessage.helpers({
   }
 });
 
+Template.NegotiationAcceptOfferExtra.helpers({
+  canAcceptOffer: function() {
+    var nego = OfferJar.UI.currentNegotiation.get();
+    return nego ? nego.canTransition(Meteor.userId(),'accept_other_bid') : false;
+  }
+});
 
+Template.NegotiationAcceptOfferExtra.hooks({
+  rendered: function() {
+    this.animIntervalId = Meteor.setInterval(function() {
+      this.$(".animate.glyphicon").velocity("callout.oj_animate_arrow");
+    }, 1000);
+  },
+  destroyed: function() {
+    Meteor.clearInterval(this.animIntervalId);
+  }
+});
+
+Template.NegotiationAcceptOfferExtra.events({
+  'click a': function(event,template) {
+    var $anchor = $(event.target);
+    var href = $anchor.attr('href');
+    var $target = $(href);
+    $target.velocity("scroll", {duration: 500});
+    Meteor.clearInterval(template.animIntervalId);
+    return false;
+  }
+});
 

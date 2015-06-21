@@ -19,5 +19,15 @@ Template.NegotiationHistoryRow.helpers({
   },
   time:function() {
     return this[3];
+  },
+  index: function() {
+    return this[4];
   }
 });
+
+Template.NegotiationHistory.hooks({
+  rendered: function() {
+    var $history_wrapper = this.$('#negotiation-history');
+    $('.history-item',$history_wrapper).last().velocity("scroll", {duration: 500, easing: "spring", container: $history_wrapper});
+  }
+})

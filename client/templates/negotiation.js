@@ -13,3 +13,4 @@ Template.Negotiation.helpers({
     }
   }
 });
+

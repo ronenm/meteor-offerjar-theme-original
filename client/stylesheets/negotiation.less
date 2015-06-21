@@ -42,16 +42,36 @@
     }
 }
 
+#submit-bid, #accept_other_bid {
+    width: 100px;
+}
+
 #negotiation-panel {
     div.panel-body {
         background-color: #f4faf0;
     }
-    div.negotiation-history.list-group {
-        max-height: 300px;
+    div#negotiation-history {
+        max-height: 6em;
         overflow-x: hidden;
         overflow-y: scroll;
+        background-color: white;
     }
+    
+    .well {
+        background: transparent;
+    }
+    
+    .animate.glyphicon {
+        zoom: 1.3;
+        vertical-align: top;
+    }
+    
+    #direct-to-offer {
+        display: inline-block;
+    }
+    
 }
+
 
 #negotiationForm {
   span.currnecy-symbol {
@@ -59,8 +79,15 @@
     display: inline-block;
     text-align: right;
   }
+  h4.legend label {
+    font-weight: normal;
+  }
   input[name="bid"] {
-    width: 10em;
+    width: auto;
+    padding: 6px;
+    font-size: inherit;
+    display: inline;
+    margin-top: -10px;
   }
   button[type="submit"] {
     vertical-align: top;

@@ -87,8 +87,8 @@ Template.PriceLineCallOut.hooks({
       var nego = OfferJar.UI.currentNegotiation.get();
       if (nego[field] !== tempInst.oldPrice) {
         tempInst.$('.price').velocity('callout.oj_flash',{
-          duration: 3000,                                                      
-          delay: 500,
+          duration: 2000,                                                      
+          delay: 500+Math.floor(Math.random()*3000),
           drag: true,
           stagger: 1600,
           backwards: true
@@ -198,12 +198,10 @@ Template.NegotiationLatestMessage.helpers({
     var waiting = !negotiation || negotiation.isWaiting;
     var att = {
       id: waiting ? "waiting-for-response" : "latest-message",
-      class: waiting ? "row alert alert-info loading" : "well well-sm"
+      class: waiting ? "row alert alert-info loading" : "row alert alert-success", // Use to be: "well well-sm"
+      role: "alert"
     }
     
-    if (waiting) {
-      att.role = "alert";
-    }
     return att;
   },
   showSpin: function() {
@@ -241,16 +239,17 @@ Template.NegotiationAcceptOfferExtra.helpers({
   }
 });
 
-Template.NegotiationAcceptOfferExtra.hooks({
-  rendered: function() {
-    this.animIntervalId = Meteor.setInterval(function() {
-      this.$(".animate.glyphicon").velocity("callout.oj_animate_arrow");
-    }, 1000);
-  },
-  destroyed: function() {
-    Meteor.clearInterval(this.animIntervalId);
-  }
-});
+//Template.NegotiationAcceptOfferExtra.hooks({
+//  rendered: function() {
+//    this.animIntervalId = Meteor.setInterval(function() {
+//      this.$(".animate.glyphicon").velocity("callout.oj_animate_arrow");
+//    }, 1000);
+//  },
+//  destroyed: function() {
+//    Meteor.clearInterval(this.animIntervalId);
+//  }
+//});
+
 
 Template.NegotiationAcceptOfferExtra.events({
   'click a': function(event,template) {
@@ -258,7 +257,8 @@ Template.NegotiationAcceptOfferExtra.events({
     var href = $anchor.attr('href');
     var $target = $(href);
     $target.velocity("scroll", {duration: 500});
-    Meteor.clearInterval(template.animIntervalId);
+    $('input[name="bid"]',$target).focus();
+    //Meteor.clearInterval(template.animIntervalId);
     return false;
   }
 });

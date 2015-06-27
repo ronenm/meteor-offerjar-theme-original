@@ -1,6 +1,6 @@
 Package.describe({
   name: 'ronenm:offerjar-theme-original',
-  version: '0.0.2',
+  version: '0.0.3',
   // Brief, one-line summary of the package.
   summary: 'Official templates for the OfferJar UI',
   // URL to the Git repository containing the source code for this package.
@@ -12,8 +12,8 @@ Package.describe({
 
 Package.onUse(function(api) {
   api.versionsFrom('1.0.4.1');
-  api.use('ronenm:offerjar-ui@0.0.2'); // This is a client only package
-  api.use('ronenm:offerjar-i18n-official@0.0.2');
+  api.use('ronenm:offerjar-ui@0.0.3'); // This is a client only package
+  api.use('ronenm:offerjar-i18n-official@0.0.4');
   api.use('ronenm:with-loading@1.0.0');
   api.use([
     'blaze',

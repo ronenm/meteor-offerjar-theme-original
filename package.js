@@ -1,6 +1,6 @@
 Package.describe({
   name: 'ronenm:offerjar-theme-original',
-  version: '0.0.3',
+  version: '0.0.4',
   // Brief, one-line summary of the package.
   summary: 'Official templates for the OfferJar UI',
   // URL to the Git repository containing the source code for this package.
@@ -11,7 +11,7 @@ Package.describe({
 });
 
 Package.onUse(function(api) {
-  api.versionsFrom('1.0.4.1');
+  api.versionsFrom('1.3.1');
   api.use('ronenm:offerjar-ui@0.0.3'); // This is a client only package
   api.use('ronenm:offerjar-i18n-official@0.0.4');
   api.use('ronenm:with-loading@1.0.0');
@@ -21,13 +21,13 @@ Package.onUse(function(api) {
     'templating',
     'minimongo',
   ], 'client');
-  api.use('less');
-  api.use('aldeed:template-extension@3.4.3','client');
+  api.use('less@2.5.0');
+  api.use('aldeed:template-extension@4.0.0','client');
   api.use('aldeed:autoform@5.1.0');
-  api.use('lbee:moment-helpers@0.2.0','client');
+  api.use('lbee:moment-helpers@1.3.0','client');
   api.use('udondan:slick@1.3.0','client');
   api.use('underscore');
-  api.use('underscorestring:underscore.string@3.0.3');
+  api.use('underscorestring:underscore.string@3.3.0');
   
   api.addFiles("client/startup.js",'client');
   var templates_files = ['gallery','negotiation_dialog','negotiation_form', 'negotiation_history', 'negotiation'];
